@@ -113,7 +113,7 @@ Ensure the response is **only** a JSON array with this structure:
 
             <Dialog open={openDialog}>
 
-                <DialogContent className="max-w-2xl" onClick={() => setOpenDialog(false)}>
+                <DialogContent className="max-w-2xl">
                     <DialogHeader>
                         <DialogTitle className="text-2xl">Tell us more about your Job Interview</DialogTitle>
                         <DialogDescription>
