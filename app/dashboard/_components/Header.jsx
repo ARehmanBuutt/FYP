@@ -26,29 +26,37 @@ function Header() {
                     </li>
                 </Link>
 
+                <Link href={'/dashboard'}>
                 <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
                     ${path == `/dashboard` && `text-primary font-bold`}
                     `}>
                     DashBoard
                 </li>
+                </Link>
 
+                <Link href={'/resumebuilder'}>
                 <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
-                    ${path == `/questions` && `text-primary font-bold`}
+                    ${path == `/resumebuilder` && `text-primary font-bold`}
                     `}>
-                    Questions
+                    Resume Builder
                 </li>
+                </Link>
 
+                <Link href={'/suggestions'}>
                 <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
-                    ${path == `/upgrade` && `text-primary font-bold`}
+                    ${path == `/suggestions` && `text-primary font-bold`}
                     `}>
-                    Upgrade
+                    Job Suggestions
                 </li>
+                </Link>
 
+                <Link href={'/about'}>
                 <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
-                    ${path == `/working` && `text-primary font-bold`}
+                    ${path == `/about` && `text-primary font-bold`}
                     `}>
-                    Working
+                    About
                 </li>
+                </Link>
 
             </ul>
             <UserButton />
