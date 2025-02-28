@@ -1,13 +1,13 @@
 "use client"
-import { Button } from "@/components/ui/button"
+import { Button } from "../../../../../components/ui/button"
 import {
     Collapsible,
     CollapsibleContent,
     CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "../../../../../components/ui/collapsible"
 
-import { db } from '@/utils/db'
-import { UserAnswer } from '@/utils/schema'
+import { db } from '../../../../../utils/db'
+import { UserAnswer } from '../../../../../utils/schema'
 import { eq } from 'drizzle-orm'
 import { ChevronsUpDownIcon } from "lucide-react"
 import { useRouter } from "next/navigation"

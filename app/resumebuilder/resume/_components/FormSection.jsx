@@ -1,10 +1,11 @@
 "use client"
 import React, { useState } from 'react'
 import PersonalDetail from './form/PersonalDetail'
-import { Button } from '@/components/ui/button'
+import { Button } from '../../../../components/ui/button'
 import { ArrowLeft, ArrowRight, LayoutGrid } from 'lucide-react'
 import Summary from './form/Summary'
 import Experience from './form/Experience'
+import Education from './form/Education'
 
 const FormSection = () => {
     const [activeFormIndex, setActiveFormIndex] = useState(1)
@@ -41,6 +42,8 @@ const FormSection = () => {
             <Summary enabledNext={(v)=>setEnableNext(v)}/>
             :activeFormIndex==3?
             <Experience enabledNext={(v)=>setEnableNext(v)}/>
+            :activeFormIndex==4?
+            <Education enabledNext={(v)=>setEnableNext(v)}/>
             :null
         }
 

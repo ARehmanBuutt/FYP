@@ -1,10 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import { db } from '@/utils/db'
+import { db } from '../../../../utils/db'
 import { eq } from 'drizzle-orm'
-import { MockInterview } from '@/utils/schema'
+import { MockInterview } from '../../../../utils/schema'
 import { Ghost, Lightbulb, WebcamIcon } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '../../../../components/ui/button'
 import Webcam from "react-webcam";
 import Link from 'next/link'
 

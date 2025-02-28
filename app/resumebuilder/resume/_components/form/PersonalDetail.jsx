@@ -1,15 +1,17 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ResumeInfoContext } from "@/app/context/ResumeInfoContext";
+import { Button } from "../../../../../components/ui/button";
+import { Input } from "../../../../../components/ui/input";
+import { ResumeInfoContext } from "../../../../context/ResumeInfoContext";
 import { LoaderCircle } from "lucide-react";
 import React, { useContext, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import { db } from "@/utils/db";
-import { resumes } from "@/utils/schema";
+import { db } from "../../../../../utils/db";
+import { resumes } from "../../../../../utils/schema";
 import { eq } from "drizzle-orm";
+import Experience from "./Experience";
+
 
 export default function PersonalDetail({ enabledNext }) {
   const searchParams = useSearchParams();
@@ -120,7 +122,12 @@ export default function PersonalDetail({ enabledNext }) {
             {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
           </Button>
         </div>
-      </form>
-    </div>
+      {/* </form>
+    </div> */}
+          </form>
+
+{/* Pass resumeId to Experience */}
+{/* {resumeId && <Experience resumeId={resumeId} />} */}
+</div>
   );
 }

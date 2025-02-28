@@ -1,12 +1,12 @@
 "use client"
-import { db } from "@/utils/db";
-import { MockInterview } from "@/utils/schema";
+import { db } from "../../../../../utils/db";
+import { MockInterview } from "../../../../../utils/schema";
 import { eq } from "drizzle-orm";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import QuestionSection from "./_components/QuestionSection";
 import RecordAnswerSection from "./_components/RecordAnswerSection";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../../../../components/ui/button";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 

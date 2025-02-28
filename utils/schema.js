@@ -39,3 +39,15 @@ export const resumes = pgTable("resumes", {
   userName: text("user_name").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const experience = pgTable("experience", {
+  id: serial("id").primaryKey(),
+  resumeId: uuid("resume_id").defaultRandom().notNull(),
+  positionTitle : text("positionTitle").notNull(),
+  companyName : text("companyName").notNull(),
+  city : text("city").notNull(),
+  state : text("state").notNull(),
+  startDate : text("startDate").notNull(),
+  endDate : text("endDate").notNull(),
+  workSummary : text("workSummary").notNull(),
+});

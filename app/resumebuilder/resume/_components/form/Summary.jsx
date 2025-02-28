@@ -1,16 +1,16 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { ResumeInfoContext } from "@/app/context/ResumeInfoContext";
+import { Button } from "../../../../../components/ui/button";
+import { Textarea } from "../../../../../components/ui/textarea";
+import { ResumeInfoContext } from "../../../../context/ResumeInfoContext";
 import { LoaderCircle, Brain } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import { db } from "@/utils/db";
-import { resumes } from "@/utils/schema";
+import { db } from "../../../../../utils/db";
+import { resumes } from "../../../../../utils/schema";
 import { eq } from "drizzle-orm";
-import { chatSession } from "@/utils/GeminiAIModal";
+import { chatSession } from "../../../../../utils/GeminiAIModal";
 
 const prompt = "Job Title: {jobTitle}, Based on the job title, provide a list of summaries for three experience levels (Senior, Mid, Fresher) in 3-4 lines. Return data as a JSON array with 'summary' and 'experience_level' fields.";
 

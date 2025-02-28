@@ -1,92 +1,216 @@
 "use client"
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import React, { useState } from 'react'
+import { Button } from '../../../../../components/ui/button'
+import { Input } from '../../../../../components/ui/input'
+import React, { useContext, useEffect, useState } from 'react'
 import RichTextEditor from '../RichTextEditor'
+import { ResumeInfoContext } from '../../../../context/ResumeInfoContext'
+import { db } from '../../../../../utils/db'
+import { toast } from 'sonner'
+import { experience } from '../../../../../utils/schema'
+import { LoaderCircle } from 'lucide-react'
 
-const formField={
-    title:'',
-    companyName:'',
-    city:'',
-    state:'',
-    startDate:'',
-    endDate:'',
-    workSummary:''
+
+const formField = {
+    title: '',
+    companyName: '',
+    city: '',
+    state: '',
+    startDate: '',
+    endDate: '',
+    workSummary: ''
 }
 
-const Experience = () => {
+
+// const Experience = () => {
+    const Experience = ({ resumeId }) => {
+    const [loading, setLoading] = useState(false)
     const [experienceList, setExperienceList] = useState([
         formField
     ])
-    const handleChange=(index,event)=>{
+
+    const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext)
+
+    const handleChange = (index, event) => {
+        const newEntries = experienceList.slice()
+        const { name, value } = event.target;
+        newEntries[index][name] = value;
+        setExperienceList(newEntries)
     }
-    const AddNewExperience=()=>{
-        setExperienceList([...experienceList,formField])
+    const AddNewExperience = () => {
+        setExperienceList([...experienceList, {
+            title: '',
+            companyName: '',
+            city: '',
+            state: '',
+            startDate: '',
+            endDate: '',
+            workSummary: ''
+        }])
     }
-    const RemoveExperience=()=>{
-        // setExperienceList(experienceList=>experienceList.slice(0,-1))
+    // const RemoveExperience = () => {
+    //     setExperienceList(experienceList => experienceList.slice(0, -1))
+    // }
+
+    const RemoveExperience = async (index) => {
+        const experienceToRemove = experienceList[index];
+
+        if (!experienceToRemove || !resumeId) {
+            toast.error("❌ Invalid experience entry or resume ID");
+            return;
+        }
+
+        try {
+            console.log("📌 Deleting experience:", experienceToRemove);
+
+            // Remove from DB if it exists
+            await db.delete(experience)
+                .where(
+                    eq(experience.resumeId, resumeId),
+                    eq(experience.positionTitle, experienceToRemove.title)
+                );
+
+            toast.success("✅ Experience removed successfully");
+        } catch (error) {
+            console.error("❌ Error deleting experience:", error);
+            toast.error("Error removing experience");
+        }
+
+        // Remove from state
+        setExperienceList(experienceList => experienceList.slice(0, -1));
+    };
+
+    const handleRichTextEditor = (e, name, index) => {
+        const newEntries = experienceList.slice();
+        newEntries[index][name] = e.target.value;
+        setExperienceList(newEntries);
+
     }
+    useEffect(() => {
+        setResumeInfo({
+            ...resumeInfo,
+            experience: experienceList
+        })
+        console.log(experienceList)
+    }, [experienceList])
 
-  return (
-    <div>
-        <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
-      <h2 className="font-bold text-lg">Professional Experience</h2>
-      <p>Add Your previoius Job experience</p>
-      <div>
-        {experienceList.map((item,index)=>(
-            <div>
-                <div className='grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg'>
-                    <div>
-                        <label className='text-xs'>Position Title</label>
-                        <Input name="title" onChange={(event)=>handleChange(index,event)}/>
-                    </div>
+    const onSave = async () => {
+        setLoading(true);
 
-                    <div>
-                        <label className='text-xs'>Company Name</label>
-                        <Input name="companyName" onChange={(event)=>handleChange(index,event)}/>
-                    </div>
+        if (!resumeId) {
+            toast.error("❌ Invalid resume ID");
+            console.error("❌ Resume ID is missing:", resumeId);
+            setLoading(false);
+            return;
+        }
 
-                    <div>
-                        <label className='text-xs'>City</label>
-                        <Input name="city" onChange={(event)=>handleChange(index,event)}/>
-                    </div>
+        try {
+            console.log("📌 Updating experience for resumeId:", resumeId);
+            console.log("📌 Experience Data:", experienceList);
 
-                    <div>
-                        <label className='text-xs'>State</label>
-                        <Input name="state" onChange={(event)=>handleChange(index,event)}/>
-                    </div>
+            // Filter out empty entries
+            const validExperiences = experienceList.filter(exp => exp.title.trim());
 
-                    <div>
-                        <label className='text-xs'>Start Date</label>
-                        <Input type='date' name="startDate" onChange={(event)=>handleChange(index,event)}/>
-                    </div>
+            if (validExperiences.length === 0) {
+                toast.error("❌ No valid experiences to save");
+                setLoading(false);
+                return;
+            }
 
-                    <div>
-                        <label className='text-xs'>End Date</label>
-                        <Input type='date' name="endDate" onChange={(event)=>handleChange(index,event)}/>
-                    </div>
+            // Prepare the insert data
+            const insertData = validExperiences.map(exp => ({
+                resumeId,
+                positionTitle: exp.title,
+                companyName: exp.companyName,
+                city: exp.city,
+                state: exp.state,
+                startDate: exp.startDate,
+                endDate: exp.endDate,
+                workSummary: exp.workSummary,
+            }));
 
-                    <div className='col-span-2'>
-                        <RichTextEditor/>
-                    </div>
+            // Insert into database
+            await db.insert(experience).values(insertData);
 
+            toast.success("✅ Experience saved successfully");
+        } catch (error) {
+            console.error("❌ Database update error:", error);
+            toast.error("Error updating experience");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
+    return (
+        <div>
+            <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
+                <h2 className="font-bold text-lg">Professional Experience</h2>
+                <p>Add Your previoius Job experience</p>
+                <div>
+                    {experienceList.map((item, index) => (
+                        <div key={index}>
+                            <div className='grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg'>
+                                <div>
+                                    <label className='text-xs'>Position Title</label>
+                                    <Input name="title" onChange={(event) => handleChange(index, event)} />
+                                </div>
+
+                                <div>
+                                    <label className='text-xs'>Company Name</label>
+                                    <Input name="companyName" onChange={(event) => handleChange(index, event)} />
+                                </div>
+
+                                <div>
+                                    <label className='text-xs'>City</label>
+                                    <Input name="city" onChange={(event) => handleChange(index, event)} />
+                                </div>
+
+                                <div>
+                                    <label className='text-xs'>State</label>
+                                    <Input name="state" onChange={(event) => handleChange(index, event)} />
+                                </div>
+
+                                <div>
+                                    <label className='text-xs'>Start Date</label>
+                                    <Input type='date' name="startDate" onChange={(event) => handleChange(index, event)} />
+                                </div>
+
+                                <div>
+                                    <label className='text-xs'>End Date</label>
+                                    <Input type='date' name="endDate" onChange={(event) => handleChange(index, event)} />
+                                </div>
+
+                                <div className='col-span-2'>
+                                    <RichTextEditor
+                                        index={index}
+                                        onRichTextEditorChange={(event) => handleRichTextEditor(event, 'workSummary', index)} />
+                                </div>
+
+                            </div>
+                        </div>
+                    ))}
                 </div>
+
+                <div className='flex justify-between'>
+                    <div className='flex gap-2'>
+                        {/* <Button variant="outline" onClick={RemoveExperience} className="text-primary"> - Remove</Button> */}
+                        <Button variant="outline" onClick={() => RemoveExperience(experienceList.length - 1)} className="text-primary">
+                            - Remove
+                        </Button>
+                        <Button variant="outline" onClick={AddNewExperience} className="text-primary"> + Add More Experience</Button>
+
+                    </div>
+                    <Button type="submit" disabled={loading} onClick={()=>onSave()}
+                    // onClick={()=>onSave()}
+                    >
+                        {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
+                    </Button>
+                    {/* <Button>Save</Button> */}
+                </div>
+
             </div>
-        ))}
         </div>
-
-      <div className='flex justify-between'>
-        <div className='flex gap-2'>
-        <Button variant="outline" onClick={AddNewExperience} className="text-primary"> - Remove</Button>
-        <Button variant="outline" onClick={RemoveExperience} className="text-primary"> + Add More Experience</Button>
-
-        </div>
-        <Button>Save</Button>
-      </div>
-
-      </div>
-    </div>
-  )
+    )
 }
 
 export default Experience

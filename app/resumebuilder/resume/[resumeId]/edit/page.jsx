@@ -2,8 +2,8 @@
 import React, { useEffect,useState } from 'react'
 import FormSection from '../../_components/FormSection'
 import ResumePreview from '../../_components/ResumePreview'
-import { ResumeInfoContext } from '@/app/context/ResumeInfoContext'
-import dummy from '@/app/resumebuilder/data/dummy'
+import { ResumeInfoContext } from '../../../../../app/context/ResumeInfoContext'
+import dummy from '../../../../../app/resumebuilder/data/dummy'
 
 
 const EditResume = ({params}) => {

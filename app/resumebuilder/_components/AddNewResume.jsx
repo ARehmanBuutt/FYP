@@ -9,14 +9,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+} from "../../../components/ui/dialog";
+import { Button } from "../../../components/ui/button";
+import { Input } from "../../../components/ui/input";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { db } from "@/utils/db";
-import { resumes } from "@/utils/schema";
+import { db } from "../../../utils/db";
+import { resumes } from "../../../utils/schema";
 
 export default function AddResume() {
   const [openDialog, setOpenDialog] = useState(false);

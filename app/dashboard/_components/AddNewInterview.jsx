@@ -1,9 +1,9 @@
 "use client"
 import { useState } from "react"
 import React from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { Button } from '../../../components/ui/button'
+import { Input } from '../../../components/ui/input'
+import { Textarea } from '../../../components/ui/textarea'
 import {
     Dialog,
     DialogClose,
@@ -12,12 +12,12 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog"
-import { chatSession } from "@/utils/GeminiAIModal"
+} from "../../../components/ui/dialog"
+import { chatSession } from "../../../utils/GeminiAIModal"
 import { LoaderCircle } from "lucide-react"
 import { v4 as uuidv4 } from 'uuid';
-import { db } from '@/utils/db'
-import { MockInterview } from '@/utils/schema'
+import { db } from '../../../utils/db'
+import { MockInterview } from '../../../utils/schema'
 import { useUser } from "@clerk/nextjs"
 import moment from 'moment'
 import { useRouter } from "next/navigation"

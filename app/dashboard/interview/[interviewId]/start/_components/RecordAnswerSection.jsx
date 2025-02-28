@@ -2,14 +2,14 @@
 import Webcam from 'react-webcam'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '../../../../../../components/ui/button'
 import useSpeechToText from 'react-hook-speech-to-text';
 import { Mic, StopCircle } from 'lucide-react'
 import { toast } from 'sonner'
-import { chatSession } from '@/utils/GeminiAIModal'
-import { UserAnswer } from '@/utils/schema'
+import { chatSession } from '../../../../../../utils/GeminiAIModal'
+import { UserAnswer } from '../../../../../../utils/schema'
 import { useUser } from '@clerk/nextjs'
-import { db } from '@/utils/db'
+import { db } from '../../../../../../utils/db'
 import moment from "moment";
 
 const RecordAnswerSection = ({ mockInterviewQuestion, activeQuestionIndex, interviewData }) => {
