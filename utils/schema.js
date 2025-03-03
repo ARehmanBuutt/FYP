@@ -51,3 +51,14 @@ export const experience = pgTable("experience", {
   endDate : text("endDate").notNull(),
   workSummary : text("workSummary").notNull(),
 });
+
+export const education = pgTable("education", {
+  id: serial("id").primaryKey(),
+  resumeId: uuid("resume_id").defaultRandom().notNull(),
+  universityName : text("universityName").notNull(),
+  degree : text("degree").notNull(),
+  major : text("major").notNull(),
+  startDate : text("startDate").notNull(),
+  endDate : text("endDate").notNull(),
+  description : text("description").notNull(),
+});

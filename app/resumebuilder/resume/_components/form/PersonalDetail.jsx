@@ -11,6 +11,7 @@ import { db } from "../../../../../utils/db";
 import { resumes } from "../../../../../utils/schema";
 import { eq } from "drizzle-orm";
 import Experience from "./Experience";
+import Education from "./Education";
 
 
 export default function PersonalDetail({ enabledNext }) {
@@ -127,7 +128,8 @@ export default function PersonalDetail({ enabledNext }) {
           </form>
 
 {/* Pass resumeId to Experience */}
-{/* {resumeId && <Experience resumeId={resumeId} />} */}
+{resumeId && <Experience resumeId={resumeId} />}
+{resumeId && <Education resumeId={resumeId} />}
 </div>
   );
 }
