@@ -8,6 +8,7 @@ import { db } from '../../../../../utils/db'
 import { toast } from 'sonner'
 import { experience } from '../../../../../utils/schema'
 import { LoaderCircle } from 'lucide-react'
+import { useSearchParams } from "next/navigation";
 
 
 const formField = {
@@ -21,12 +22,44 @@ const formField = {
 }
 
 
-// const Experience = () => {
-    const Experience = ({ resumeId }) => {
+const Experience = () => {
+    // const Experience = ({ resumeId }) => {
     const [loading, setLoading] = useState(false)
     const [experienceList, setExperienceList] = useState([
         formField
     ])
+
+    const [resumeId, setResumeId] = useState(null);
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        const id = window.location.pathname.split("/")[3] || searchParams.get("resumeId");
+
+        if (id) {
+            setResumeId(id);
+            console.log("🔍 Retrieved resumeId:", id);
+
+            // Fetch existing experiences from DB when page loads
+            fetchExperienceData(id);
+        }
+    }, [searchParams]);
+
+    const fetchExperienceData = async (id) => {
+        try {
+            console.log("📌 Fetching experience data for resumeId:", id);
+
+            // Fetch from database
+            const experienceData = await db.select().from(experience).where(eq(experience.resumeId, id));
+
+            if (experienceData.length > 0) {
+                setExperienceList(experienceData);
+                console.log("✅ Experience data loaded:", experienceData);
+            } else {
+                console.log("❌ No experience data found for this resumeId.");
+            }
+        } catch (error) {
+        }
+    };
 
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext)
 
@@ -152,32 +185,32 @@ const formField = {
                             <div className='grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg'>
                                 <div>
                                     <label className='text-xs'>Position Title</label>
-                                    <Input name="title" onChange={(event) => handleChange(index, event)} />
+                                    <Input name="title" defaultValue={item.title} onChange={(event) => handleChange(index, event)} />
                                 </div>
 
                                 <div>
                                     <label className='text-xs'>Company Name</label>
-                                    <Input name="companyName" onChange={(event) => handleChange(index, event)} />
+                                    <Input name="companyName" defaultValue={item.companyName} onChange={(event) => handleChange(index, event)} />
                                 </div>
 
                                 <div>
                                     <label className='text-xs'>City</label>
-                                    <Input name="city" onChange={(event) => handleChange(index, event)} />
+                                    <Input name="city" defaultValue={item.city} onChange={(event) => handleChange(index, event)} />
                                 </div>
 
                                 <div>
                                     <label className='text-xs'>State</label>
-                                    <Input name="state" onChange={(event) => handleChange(index, event)} />
+                                    <Input name="state" defaultValue={item.state} onChange={(event) => handleChange(index, event)} />
                                 </div>
 
                                 <div>
                                     <label className='text-xs'>Start Date</label>
-                                    <Input type='date' name="startDate" onChange={(event) => handleChange(index, event)} />
+                                    <Input type='date' name="startDate" defaultValue={item.endDate} onChange={(event) => handleChange(index, event)} />
                                 </div>
 
                                 <div>
                                     <label className='text-xs'>End Date</label>
-                                    <Input type='date' name="endDate" onChange={(event) => handleChange(index, event)} />
+                                    <Input type='date' name="endDate" defaultValue={item.endDate} onChange={(event) => handleChange(index, event)} />
                                 </div>
 
                                 <div className='col-span-2'>
@@ -200,7 +233,7 @@ const formField = {
                         <Button variant="outline" onClick={AddNewExperience} className="text-primary"> + Add More Experience</Button>
 
                     </div>
-                    <Button type="submit" disabled={loading} onClick={()=>onSave()}
+                    <Button type="submit" disabled={loading} onClick={() => onSave()}
                     // onClick={()=>onSave()}
                     >
                         {loading ? <LoaderCircle className="animate-spin" /> : "Save"}

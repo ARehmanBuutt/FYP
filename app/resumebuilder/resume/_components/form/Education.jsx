@@ -9,8 +9,10 @@ import { education } from '../../../../../utils/schema';
 import { toast } from 'sonner';
 import { LoaderCircle } from 'lucide-react';
 import { eq } from 'drizzle-orm';
+import { useSearchParams } from "next/navigation";
 
-const Education = ({ resumeId }) => {
+const Education = () => {
+    // const Education = ({ resumeId }) => {
     const [loading, setLoading] = useState(false);
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
     const [educationalList, setEducationalList] = useState([
@@ -23,6 +25,38 @@ const Education = ({ resumeId }) => {
             description: ''
         }
     ]);
+
+    const [resumeId, setResumeId] = useState(null);
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        const id = window.location.pathname.split("/")[3] || searchParams.get("resumeId");
+
+        if (id) {
+            setResumeId(id);
+            console.log("🔍 Retrieved resumeId:", id);
+
+            // Fetch existing experiences from DB when page loads
+            fetchEducationData(id);
+        }
+    }, [searchParams]);
+
+    const fetchEducationData = async (id) => {
+        try {
+            console.log("📌 Fetching education data for resumeId:", id);
+
+            // Fetch from database
+            const educationData = await db.select().from(education).where(eq(education.resumeId, id));
+
+            if (educationData.length > 0) {
+                setEducationalList(educationData);
+                console.log("✅ Education data loaded:", educationData);
+            } else {
+                console.log("❌ No Education data found for this resumeId.");
+            }
+        } catch (error) {
+        }
+    };
 
     const handleChange = (index, event) => {
         const newEntries = [...educationalList];
@@ -44,7 +78,7 @@ const Education = ({ resumeId }) => {
 
     const RemoveEducation = async (index) => {
         const educationToRemove = educationalList[index];
-        
+
         if (!educationToRemove || !resumeId) {
             toast.error("❌ Invalid education entry or resume ID");
             return;
@@ -128,27 +162,27 @@ const Education = ({ resumeId }) => {
                     <div key={index} className='grid grid-cols-2 gap-3 border p-3 my-5'>
                         <div className='col-span-2'>
                             <label className='text-xs'>University Name</label>
-                            <Input name="universityName" value={item.universityName} onChange={(e) => handleChange(index, e)} />
+                            <Input name="universityName" defaultValue={item.universityName} onChange={(e) => handleChange(index, e)} />
                         </div>
                         <div>
                             <label className='text-xs'>Degree</label>
-                            <Input name="degree" value={item.degree} onChange={(e) => handleChange(index, e)} />
+                            <Input name="degree" defaultValue={item.degree} onChange={(e) => handleChange(index, e)} />
                         </div>
                         <div>
                             <label className='text-xs'>Major</label>
-                            <Input name="major" value={item.major} onChange={(e) => handleChange(index, e)} />
+                            <Input name="major" defaultValue={item.major} onChange={(e) => handleChange(index, e)} />
                         </div>
                         <div>
                             <label className='text-xs'>Start Date</label>
-                            <Input type='date' name="startDate" value={item.startDate} onChange={(e) => handleChange(index, e)} />
+                            <Input type='date' name="startDate" defaultValue={item.startDate} onChange={(e) => handleChange(index, e)} />
                         </div>
                         <div>
                             <label className='text-xs'>End Date</label>
-                            <Input type='date' name="endDate" value={item.endDate} onChange={(e) => handleChange(index, e)} />
+                            <Input type='date' name="endDate" defaultValue={item.endDate} onChange={(e) => handleChange(index, e)} />
                         </div>
                         <div className='col-span-2'>
                             <label className='text-xs'>Description</label>
-                            <Textarea name="description" value={item.description} onChange={(e) => handleChange(index, e)} />
+                            <Textarea name="description" defaultValue={item.description} onChange={(e) => handleChange(index, e)} />
                         </div>
                     </div>
                 ))}
