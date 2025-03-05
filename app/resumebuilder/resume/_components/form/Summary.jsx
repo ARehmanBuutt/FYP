@@ -116,7 +116,7 @@ export default function Summary({ enabledNext }) {
             <Brain className="h-4 w-4" /> {loading ? <LoaderCircle className="animate-spin" /> : "Generate from AI"}
           </Button>
         </div>
-        <Textarea className="mt-5" required value={summary} onChange={(e) => setSummary(e.target.value)} />
+        <Textarea placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." className="mt-5" required value={summary} onChange={(e) => setSummary(e.target.value)} />
         <div className="mt-2 flex justify-end">
           <Button type="submit" disabled={loading}>
             {loading ? <LoaderCircle className="animate-spin" /> : "Save"}

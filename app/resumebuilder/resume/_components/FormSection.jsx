@@ -7,10 +7,20 @@ import Summary from './form/Summary'
 import Experience from './form/Experience'
 import Education from './form/Education'
 import Skills from './form/Skills'
+import { useRouter } from 'next/navigation';
+
 
 const FormSection = () => {
     const [activeFormIndex, setActiveFormIndex] = useState(1)
     const [enabledNext, setEnableNext] = useState(false)
+    const router = useRouter();
+
+    // useEffect(() => {
+    //     if (activeFormIndex === 6) {
+    //         router.push('/resumebuilder'); // Redirect to the desired URL
+    //     }
+    // }, [activeFormIndex, router]);
+
     return (
         <div>
             <div className='flex justify-between items-center mt-3'>
@@ -21,34 +31,45 @@ const FormSection = () => {
 
                 <div className='flex gap-2'>
 
-                    {activeFormIndex > 1
-                        && <Button size='sm'
-                        onClick={() => setActiveFormIndex(activeFormIndex - 1)}
-                        > <ArrowLeft /> Previoius</Button>}
+                    {activeFormIndex < 6 ? (
+                        <>
+                            {activeFormIndex > 1 && (
+                                <Button size="sm" onClick={() => setActiveFormIndex(activeFormIndex - 1)}>
+                                    <ArrowLeft /> Previous
+                                </Button>
+                            )}
 
-                    <Button
-                    disabled={!enabledNext}
-                    className='flex gap-2' size='sm'
-                    onClick={() => setActiveFormIndex(activeFormIndex + 1)}
-                    >
-                        Next
-                         <ArrowRight />
-                    </Button>
+                            <Button
+                                // disabled={!enabledNext}
+                                className="flex gap-2"
+                                size="sm"
+                                onClick={() => setActiveFormIndex(activeFormIndex + 1)}
+                            >
+                                Next <ArrowRight />
+                            </Button>
+                        </>
+                    ) : (
+                        <Button size="sm" onClick={() => setActiveFormIndex(5)}>
+                            Resume Completed!
+                        </Button>
+                    )}
+
                 </div>
             </div>
 
+
             {/* Personal detail */}
-            { activeFormIndex==1? <PersonalDetail enabledNext={(v)=>setEnableNext(v)} />
-            :activeFormIndex==2?
-            <Summary enabledNext={(v)=>setEnableNext(v)}/>
-            :activeFormIndex==3?
-            <Experience enabledNext={(v)=>setEnableNext(v)}/>
-            :activeFormIndex==4?
-            <Education enabledNext={(v)=>setEnableNext(v)}/>
-            :activeFormIndex==5?
-            <Skills enabledNext={(v)=>setEnableNext(v)}/>
-            :null
-        }
+            {activeFormIndex == 1 ? <PersonalDetail enabledNext={(v) => setEnableNext(v)} />
+                : activeFormIndex == 2 ?
+                    <Summary enabledNext={(v) => setEnableNext(v)} />
+                    : activeFormIndex == 3 ?
+                        <Experience enabledNext={(v) => setEnableNext(v)} />
+                        : activeFormIndex == 4 ?
+                            <Education enabledNext={(v) => setEnableNext(v)} />
+                            : activeFormIndex == 5 ?
+                                <Skills enabledNext={(v) => setEnableNext(v)} />
+                                : null
+            }
 
             {/* summary */}
 

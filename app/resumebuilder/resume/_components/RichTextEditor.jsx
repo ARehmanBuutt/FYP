@@ -20,13 +20,13 @@ const RichTextEditor = ({ onRichTextEditorChange, index }) => {
   const generateSummaryFromAI = async () => {
     setLoading(true);
 
-    if (!resumeInfo.experience[index].title) {
+    if (!resumeInfo.experience[index].positionTitle) {
       toast("Please add a position title");
       setLoading(false);
       return;
     }
 
-    const PROMPT = prompt.replace("{positionTitle}", resumeInfo.experience[index].title);
+    const PROMPT = prompt.replace("{positionTitle}", resumeInfo.experience[index].positionTitle);
 
     try {
       const result = await chatSession.sendMessage(PROMPT);

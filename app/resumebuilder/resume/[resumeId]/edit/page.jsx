@@ -6,7 +6,7 @@ import { ResumeInfoContext } from '../../../../../app/context/ResumeInfoContext'
 import dummy from '../../../../../app/resumebuilder/data/dummy'
 
 
-const EditResume = ({params}) => {
+const EditResume = () => {
   const [resumeInfo, setResumeInfo] = useState()
   useEffect(() => {
   //  console.log(params.resumeId)

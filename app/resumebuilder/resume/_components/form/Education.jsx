@@ -109,6 +109,49 @@ const Education = () => {
         });
     }, [educationalList]);
 
+    // const onSave = async () => {
+    //     setLoading(true);
+
+    //     if (!resumeId) {
+    //         toast.error("❌ Invalid resume ID");
+    //         console.error("❌ Resume ID is missing:", resumeId);
+    //         setLoading(false);
+    //         return;
+    //     }
+
+    //     try {
+    //         console.log("📌 Updating education for resumeId:", resumeId);
+    //         console.log("📌 Education Data:", educationalList);
+
+    //         const validEducation = educationalList.filter(edu => edu.universityName.trim());
+
+    //         if (validEducation.length === 0) {
+    //             toast.error("❌ No valid education to save");
+    //             setLoading(false);
+    //             return;
+    //         }
+
+    //         const insertData = validEducation.map(edu => ({
+    //             resumeId,
+    //             universityName: edu.universityName,
+    //             degree: edu.degree,
+    //             major: edu.major,
+    //             startDate: edu.startDate,
+    //             endDate: edu.endDate,
+    //             description: edu.description,
+    //         }));
+
+    //         await db.insert(education).values(insertData);
+
+    //         toast.success("✅ Education saved successfully");
+    //     } catch (error) {
+    //         console.error("❌ Database update error:", error);
+    //         toast.error("Error updating education");
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
+
     const onSave = async () => {
         setLoading(true);
 
@@ -131,7 +174,23 @@ const Education = () => {
                 return;
             }
 
-            const insertData = validEducation.map(edu => ({
+            // Fetch existing education entries to prevent duplicates
+            const existingEntries = await db.select().from(education).where(eq(education.resumeId, resumeId));
+
+            // Filter out duplicates
+            const newEntries = validEducation.filter(edu =>
+                !existingEntries.some(existing =>
+                    existing.universityName === edu.universityName && existing.degree === edu.degree
+                )
+            );
+
+            if (newEntries.length === 0) {
+                toast.error("❌ No new education to add (duplicate entries detected)");
+                setLoading(false);
+                return;
+            }
+
+            const insertData = newEntries.map(edu => ({
                 resumeId,
                 universityName: edu.universityName,
                 degree: edu.degree,
@@ -162,15 +221,15 @@ const Education = () => {
                     <div key={index} className='grid grid-cols-2 gap-3 border p-3 my-5'>
                         <div className='col-span-2'>
                             <label className='text-xs'>University Name</label>
-                            <Input name="universityName" defaultValue={item.universityName} onChange={(e) => handleChange(index, e)} />
+                            <Input placeholder="Western Illinois University" name="universityName" defaultValue={item.universityName} onChange={(e) => handleChange(index, e)} />
                         </div>
                         <div>
                             <label className='text-xs'>Degree</label>
-                            <Input name="degree" defaultValue={item.degree} onChange={(e) => handleChange(index, e)} />
+                            <Input placeholder="Master" name="degree" defaultValue={item.degree} onChange={(e) => handleChange(index, e)} />
                         </div>
                         <div>
                             <label className='text-xs'>Major</label>
-                            <Input name="major" defaultValue={item.major} onChange={(e) => handleChange(index, e)} />
+                            <Input placeholder="Computer Science" name="major" defaultValue={item.major} onChange={(e) => handleChange(index, e)} />
                         </div>
                         <div>
                             <label className='text-xs'>Start Date</label>
@@ -182,7 +241,7 @@ const Education = () => {
                         </div>
                         <div className='col-span-2'>
                             <label className='text-xs'>Description</label>
-                            <Textarea name="description" defaultValue={item.description} onChange={(e) => handleChange(index, e)} />
+                            <Textarea placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud" name="description" defaultValue={item.description} onChange={(e) => handleChange(index, e)} />
                         </div>
                     </div>
                 ))}

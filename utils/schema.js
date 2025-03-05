@@ -1,5 +1,4 @@
 import { pgTable, serial, text, varchar, timestamp, uuid, integer } from "drizzle-orm/pg-core";
-import { title } from "process";
 
 export const MockInterview = pgTable('mockInterview', {
   id: serial('id').primaryKey(),
@@ -32,9 +31,9 @@ export const resumes = pgTable("resumes", {
   phone: varchar("phone").notNull(),
   email: varchar("email").notNull(),
   summary: text("summary").notNull(),
-  id: serial("id").primaryKey(),
+  id: serial("id").notNull(),
   title: text("title").notNull(),
-  resumeId: uuid("resume_id").defaultRandom().notNull(),
+  resumeId: uuid("resume_id").defaultRandom().primaryKey(),
   userEmail: text("user_email").notNull(),
   userName: text("user_name").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),

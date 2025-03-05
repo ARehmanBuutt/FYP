@@ -1,5 +1,6 @@
 import React from 'react'
 import AddNewResume from './_components/AddNewResume'
+import ResumeList from './_components/ResumeList'
 
 function Resume() {
     return (
@@ -11,7 +12,7 @@ function Resume() {
             <div className='grid grid-cols-2 md:grid-col-3 lg:grid-cols-5 mt-10'>
                 <AddNewResume />
       </div>
-
+      <ResumeList />
         </div>
     )
 }
