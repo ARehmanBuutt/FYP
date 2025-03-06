@@ -46,7 +46,8 @@ const ResumeItemCard = ({ resume, onDelete }) => {
     };
 
     return (
-        <div className='border shadow-sm rounded-lg p-3'>
+        // <div className='border shadow-sm rounded-lg p-3'>
+        <div className='p-3 border bg-secondary rounded-lg w-full hover:scale-105 transition-all hover:shadow-md cursor-pointer border-dashed flex flex-col mt-4'>
             <h2 className='font-bold text-primary'>{resume?.title}</h2>
             <h3 className='text-sm text-gray-600'>{resume?.jobTitle}</h3>
 
@@ -93,8 +94,10 @@ const ResumeItemCard = ({ resume, onDelete }) => {
             </div>
 
             {/* Actions */}
-            <div className='flex justify-between mt-2 gap-5'>
-                <Button size="sm" className="w-full" onClick={onStart}>Edit Resume</Button>
+            <div className='mt-auto flex justify-between gap-5 border-t border-dashed pt-3'>
+                <Button size="sm" className="w-full " disabled={loading} onClick={onStart}>
+                    {loading ? "Fetching Data..." : "Edit Resume"}
+                </Button>
                 <Button size="sm" className="w-full" variant="destructive" disabled={loading} onClick={handleDelete}>
                     {loading ? "Deleting..." : "Delete Resume"}
                 </Button>

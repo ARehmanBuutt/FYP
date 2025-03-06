@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import PersonalDetail from './form/PersonalDetail'
 import { Button } from '../../../../components/ui/button'
 import { ArrowLeft, ArrowRight, LayoutGrid } from 'lucide-react'
@@ -15,11 +15,11 @@ const FormSection = () => {
     const [enabledNext, setEnableNext] = useState(false)
     const router = useRouter();
 
-    // useEffect(() => {
-    //     if (activeFormIndex === 6) {
-    //         router.push('/resumebuilder'); // Redirect to the desired URL
-    //     }
-    // }, [activeFormIndex, router]);
+    useEffect(() => {
+        if (activeFormIndex === 7) {
+            router.push('/resumebuilder'); // Redirect to the desired URL
+        }
+    }, [activeFormIndex, router]);
 
     return (
         <div>
@@ -49,9 +49,16 @@ const FormSection = () => {
                             </Button>
                         </>
                     ) : (
-                        <Button size="sm" onClick={() => setActiveFormIndex(5)}>
-                            Resume Completed!
+                        <>
+                        {activeFormIndex > 1 && (
+                                <Button size="sm" onClick={() => setActiveFormIndex(activeFormIndex - 1)}>
+                                    <ArrowLeft /> Previous
+                                </Button>
+                            )}
+                        <Button size="sm" onClick={() => setActiveFormIndex(7)}>
+                           Resume Completed Return to Main Page!
                         </Button>
+                        </>
                     )}
 
                 </div>

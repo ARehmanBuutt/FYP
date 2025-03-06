@@ -48,6 +48,19 @@ const Experience = () => {
 
             if (experienceData.length > 0) {
                 setExperienceList(experienceData);
+
+            // if (experienceData.length > 0) {
+            //     setExperienceList(experienceData.map(exp => ({
+            //         id: exp.id,
+            //         positionTitle: exp.positionTitle,
+            //         companyName: exp.companyName,
+            //         city: exp.city,
+            //         state: exp.state,
+            //         startDate: exp.startDate,
+            //         endDate: exp.endDate,
+            //         workSummary: exp.workSummary || ""  // Ensure workSummary is not undefined
+            //     })));
+
                 console.log("✅ Experience data loaded:", experienceData);
             } else {
                 console.log("❌ No experience data found for this resumeId.");
@@ -109,6 +122,14 @@ const Experience = () => {
         newEntries[index][name] = e.target.value;
         setExperienceList(newEntries);
     }
+
+    // const handleRichTextEditor = (value, name, index) => {
+    //     setExperienceList(prevList => {
+    //         const newEntries = [...prevList];
+    //         newEntries[index][name] = value; // Directly update the workSummary
+    //         return newEntries;
+    //     });
+    // };
 
     useEffect(() => {
         setResumeInfo({
@@ -282,6 +303,7 @@ const Experience = () => {
                             <div className='col-span-2'>
                                 <RichTextEditor
                                     index={index}
+                                    value={item.workSummary}
                                     onRichTextEditorChange={(e) => handleRichTextEditor(e, 'workSummary', index)}
                                 />
                             </div>
