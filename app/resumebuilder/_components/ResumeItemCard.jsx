@@ -95,8 +95,8 @@ const ResumeItemCard = ({ resume, onDelete }) => {
 
             {/* Actions */}
             <div className='mt-auto flex justify-between gap-5 border-t border-dashed pt-3'>
-                <Button size="sm" className="w-full " disabled={loading} onClick={onStart}>
-                    {loading ? "Fetching Data..." : "Edit Resume"}
+                <Button size="sm" className="w-full " onClick={onStart}>
+                    Edit Resume
                 </Button>
                 <Button size="sm" className="w-full" variant="destructive" disabled={loading} onClick={handleDelete}>
                     {loading ? "Deleting..." : "Delete Resume"}

@@ -2,11 +2,12 @@
 import React, { useState,useEffect } from 'react'
 import PersonalDetail from './form/PersonalDetail'
 import { Button } from '../../../../components/ui/button'
-import { ArrowLeft, ArrowRight, LayoutGrid } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Home, LayoutGrid } from 'lucide-react'
 import Summary from './form/Summary'
 import Experience from './form/Experience'
 import Education from './form/Education'
 import Skills from './form/Skills'
+import DownloadShare from './form/DownloadShare'
 import { useRouter } from 'next/navigation';
 
 
@@ -15,19 +16,19 @@ const FormSection = () => {
     const [enabledNext, setEnableNext] = useState(false)
     const router = useRouter();
 
-    useEffect(() => {
-        if (activeFormIndex === 7) {
-            router.push('/resumebuilder'); // Redirect to the desired URL
-        }
-    }, [activeFormIndex, router]);
-
     return (
         <div>
             <div className='flex justify-between items-center mt-3'>
 
+                <div className='flex gap-5'>
+
                 <Button variant='outline' size='sm' className='flex gap-2'>
                     <LayoutGrid /> Theme
                 </Button>
+
+                <Button size='sm' onClick={()=>router.push('/resumebuilder')}><Home/> Home </Button>
+
+                </div>
 
                 <div className='flex gap-2'>
 
@@ -55,9 +56,6 @@ const FormSection = () => {
                                     <ArrowLeft /> Previous
                                 </Button>
                             )}
-                        <Button size="sm" onClick={() => setActiveFormIndex(7)}>
-                           Resume Completed Return to Main Page!
-                        </Button>
                         </>
                     )}
 
@@ -75,6 +73,8 @@ const FormSection = () => {
                             <Education enabledNext={(v) => setEnableNext(v)} />
                             : activeFormIndex == 5 ?
                                 <Skills enabledNext={(v) => setEnableNext(v)} />
+                                : activeFormIndex == 6 ?
+                                <DownloadShare />
                                 : null
             }
 

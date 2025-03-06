@@ -10,7 +10,7 @@ export default {
     experience: [
         {
             id: 1,
-            title: 'Full Stack Developer',
+            positionTitle: 'Full Stack Developer',
             companyName: 'Amazon',
             city: 'New York',
             state: 'NY',
@@ -26,7 +26,7 @@ export default {
         },
         {
             id: 2,
-            title: 'Frontend Developer',
+            positionTitle: 'Frontend Developer',
             companyName: 'Google',
             city: 'Charlotte',
             state: 'NC',

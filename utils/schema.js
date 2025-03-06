@@ -37,6 +37,7 @@ export const resumes = pgTable("resumes", {
   userEmail: text("user_email").notNull(),
   userName: text("user_name").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  status: text("status").default("draft").notNull(),
 });
 
 export const experience = pgTable("experience", {
