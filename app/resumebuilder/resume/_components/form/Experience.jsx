@@ -206,19 +206,19 @@ const Experience = () => {
 
             // Detect duplicates
             const duplicates = validExperiences.filter(exp =>
-                existingExperiences.some(e =>
+                !existingExperiences.some(e =>
                     e.positionTitle === exp.positionTitle && e.companyName === exp.companyName
                 )
             );
 
-            if (duplicates.length > 0) {
+            if (duplicates.length == 0) {
                 toast.warning("⚠️ Duplicate experience detected! This entry already exists.");
                 setLoading(false);
                 return;
             }
 
             // Prepare and insert new experiences
-            const insertData = validExperiences.map(exp => ({
+            const insertData = duplicates.map(exp => ({
                 resumeId,
                 positionTitle: exp.positionTitle,
                 companyName: exp.companyName,
