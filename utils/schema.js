@@ -38,6 +38,7 @@ export const resumes = pgTable("resumes", {
   userName: text("user_name").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   status: text("status").default("draft").notNull(),
+  themeColor: varchar("theme_color", { length: 10 })
 });
 
 export const experience = pgTable("experience", {

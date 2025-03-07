@@ -9,6 +9,7 @@ import Education from './form/Education'
 import Skills from './form/Skills'
 import DownloadShare from './form/DownloadShare'
 import { useRouter } from 'next/navigation';
+import ThemeColor from './preview/ThemeColor'
 
 
 const FormSection = () => {
@@ -18,13 +19,11 @@ const FormSection = () => {
 
     return (
         <div>
-            <div className='flex justify-between items-center mt-3'>
+            <div id='no-print' className='flex justify-between items-center mt-3'>
 
                 <div className='flex gap-5'>
 
-                <Button variant='outline' size='sm' className='flex gap-2'>
-                    <LayoutGrid /> Theme
-                </Button>
+               <ThemeColor/>
 
                 <Button size='sm' onClick={()=>router.push('/resumebuilder')}><Home/> Home </Button>
 
