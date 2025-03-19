@@ -6,17 +6,14 @@ import ExperiencePreview from './preview/ExperiencePreview';
 import EducationalPreview from './preview/EducationalPreview';
 import SkillsPreview from './preview/SkillsPreview';
 
-const ResumePreview = () => {
+const ResumePreview = () => { 
     const { resumeInfo } = useContext(ResumeInfoContext);
 
     return (
         <div
-            // id="resume-preview" // ✅ Added this ID for PDF download
-            id='print-area'
+            id="print-area"
             className="bg-white p-5 shadow-md rounded-lg border-t-[20px]"
-            style={{
-                borderColor: resumeInfo?.themeColor,
-            }}
+            style={{ borderColor: resumeInfo?.themeColor }}
         >
             {/* Personal Details */}
             <PersonalDetailPreview resumeInfo={resumeInfo} />
