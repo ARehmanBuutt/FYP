@@ -12,7 +12,7 @@ import { resumes } from "../../../../../utils/schema";
 import { eq } from "drizzle-orm";
 import { chatSession } from "../../../../../utils/GeminiAIModal";
 
-const prompt = "Job Title: {jobTitle}, Based on the job title, provide a list of summaries for three experience levels (Senior, Mid, Fresher) in 3-4 lines. Return data as a JSON array with 'summary' and 'experience_level' fields.";
+// const prompt = `Job Title: ${jobTitle}, Based on the job title, provide a list of summaries for three experience levels (Senior, Mid, Fresher) in 3-4 lines. Return data as a JSON array with 'summary' and 'experience_level' fields.`;
 
 export default function Summary({ enabledNext }) {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
@@ -38,8 +38,12 @@ export default function Summary({ enabledNext }) {
 
   const generateSummaryFromAI = async () => {
     setLoading(true);
-    const PROMPT = prompt.replace("{jobTitle}", resumeInfo?.jobTitle || "Software Engineer");
-    console.log("🔹 AI Prompt:", PROMPT);
+    // const PROMPT = prompt.replace("{jobTitle}", resumeInfo?.jobTitle || "Software Engineer");
+    // console.log("🔹 AI Prompt:", PROMPT);
+
+    const jobTitle = resumeInfo?.jobTitle || "Software Engineer"; // fallback title
+    const prompt = `Job Title: ${jobTitle}, Based on the job title, provide a list of summaries for three experience levels (Senior, Mid, Fresher) in 3-4 lines. Return data as a JSON array with 'summary' and 'experience_level' fields.`;
+    console.log("🔹 AI Prompt:", prompt);
 
     try {
       const result = await chatSession.sendMessage(prompt);

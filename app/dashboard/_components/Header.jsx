@@ -13,9 +13,10 @@ function Header() {
     }, [])
 
     return (
-        <div id='no-print' className='flex p-4 items-center justify-between bg-secondary shadow-sm'>
-            <Image src={'/logo.svg'} width={160} height={100} alt='logo' />
-
+        <div id='no-print' className='flex p-1 items-center justify-between bg-secondary shadow-sm'>
+            {/* <Image src={'/logo-transparent-png.png'} width={270} height={0} alt='logo' /> */}
+            <Image src={'/logo-transparent-svg.svg'} width={120} height={0} alt='logo' />
+            
             <ul className='hidden md:flex gap-6'>
 
                 <Link href={'/'}>
@@ -27,35 +28,35 @@ function Header() {
                 </Link>
 
                 <Link href={'/dashboard'}>
-                <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
+                    <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
                     ${path == `/dashboard` && `text-primary font-bold`}
                     `}>
-                    DashBoard
-                </li>
+                        Mock-Interview
+                    </li>
                 </Link>
 
                 <Link href={'/resumebuilder'}>
-                <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
+                    <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
                     ${path == `/resumebuilder` && `text-primary font-bold`}
                     `}>
-                    Resume Builder
-                </li>
+                        Resume Builder
+                    </li>
                 </Link>
 
                 <Link href={'/suggestions'}>
-                <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
+                    <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
                     ${path == `/suggestions` && `text-primary font-bold`}
                     `}>
-                    Job Suggestions
-                </li>
+                        Job Suggestions
+                    </li>
                 </Link>
 
                 <Link href={'/about'}>
-                <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
+                    <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
                     ${path == `/about` && `text-primary font-bold`}
                     `}>
-                    About
-                </li>
+                        About
+                    </li>
                 </Link>
 
             </ul>

@@ -21,42 +21,87 @@ import { resumes } from "../../../utils/schema";
 export default function AddResume() {
   const [openDialog, setOpenDialog] = useState(false);
   const [resumeTitle, setResumeTitle] = useState("");
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const onCreate = async () => {
-    setLoading(true);
+  // const onCreate = async () => {
+  //   setLoading(true);
   
-    try {
-      const resumeId = uuidv4(); // Generate unique resume ID
+  //   try {
+  //     const resumeId = uuidv4(); // Generate unique resume ID
   
-      const [newResume] = await db.insert(resumes).values({
+  //     const [newResume] = await db.insert(resumes).values({
+  //       title: resumeTitle,
+  //       resumeId,
+  //       userEmail: user?.primaryEmailAddress?.emailAddress,
+  //       userName: user?.fullName,
+  //       firstName: "",  // Default empty values to prevent errors
+  //       lastName: "",
+  //       address: "",
+  //       jobTitle: "",
+  //       phone: "",
+  //       email: "",
+  //       summary: "",
+  //     }).returning({ resumeId: resumes.resumeId });
+  
+  //     console.log("Inserted Resume ID:", newResume.resumeId);
+  
+  //     // Redirect to the resume edit page
+  //     // router.push(`/resumebuilder/resume/${newResume.resumeId}/edit`);
+  //     router.push(`/resumebuilder/resume/${newResume.resumeId}/edit?resumeId=${newResume.resumeId}`);
+  //     console.log(resumeId)
+  //   } catch (error) {
+  //     console.error("Error creating resume:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+const onCreate = async () => {
+  setLoading(true);
+
+  try {
+    if (!isLoaded || !user?.primaryEmailAddress?.emailAddress) {
+      console.error("User data not ready");
+      setLoading(false);
+      return;
+    }
+
+    const resumeId = uuidv4();
+
+    const fullName =
+      user.fullName ||
+      user.username ||
+      user.primaryEmailAddress.emailAddress.split("@")[0] ||
+      "User";
+
+    const [newResume] = await db
+      .insert(resumes)
+      .values({
         title: resumeTitle,
         resumeId,
-        userEmail: user?.primaryEmailAddress?.emailAddress,
-        userName: user?.fullName,
-        firstName: "",  // Default empty values to prevent errors
+        userEmail: user.primaryEmailAddress.emailAddress,
+        userName: fullName,
+        firstName: "",
         lastName: "",
         address: "",
         jobTitle: "",
         phone: "",
         email: "",
         summary: "",
-      }).returning({ resumeId: resumes.resumeId });
-  
-      console.log("Inserted Resume ID:", newResume.resumeId);
-  
-      // Redirect to the resume edit page
-      // router.push(`/resumebuilder/resume/${newResume.resumeId}/edit`);
-      router.push(`/resumebuilder/resume/${newResume.resumeId}/edit?resumeId=${newResume.resumeId}`);
-      console.log(resumeId)
-    } catch (error) {
-      console.error("Error creating resume:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+      })
+      .returning({ resumeId: resumes.resumeId });
+
+    router.push(
+      `/resumebuilder/resume/${newResume.resumeId}/edit?resumeId=${newResume.resumeId}`
+    );
+  } catch (error) {
+    console.error("Error creating resume:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div>
