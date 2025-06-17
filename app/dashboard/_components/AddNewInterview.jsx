@@ -14,7 +14,7 @@ import {
     DialogTrigger,
 } from "../../../components/ui/dialog"
 import { chatSession } from "../../../utils/GeminiAIModal"
-import { LoaderCircle } from "lucide-react"
+import { LoaderCircle, PlusSquare } from "lucide-react"
 import { v4 as uuidv4 } from 'uuid';
 import { db } from '../../../utils/db'
 import { MockInterview } from '../../../utils/schema'
@@ -37,9 +37,9 @@ const AddNewInterview = () => {
         setLoading(true)
         e.preventDefault()
         console.log(jobPosition, jobDesc, jobExperience)
-        
+
         // Based on this information give me 5 Interview Questions with Answers in Json Format, Give Questions and Answers as a field in JSON.
-        
+
         const InputPrompt = `
         Job Position: ${jobPosition},
         Job Description: ${jobDesc},
@@ -104,14 +104,17 @@ Ensure the response is **only** a JSON array with this structure:
 
     return (
         <div>
-            <div className="p-10 border rounded-lg bg-secondary hover:scale-145 hover:shadow-md cursor-pointer transition-all max-w-sm mx-full"
+            <div
+                // className="p-10 border rounded-lg bg-secondary hover:scale-145 hover:shadow-md cursor-pointer transition-all max-w-sm mx-full"
+                className="p-14 border items-center flex justify-center bg-secondary rounded-lg h-[300px] w-[292px] hover:scale-105 transition-all hover:shadow-md cursor-pointer border-dashed"
                 onClick={() => setOpenDialog(true)}
             >
 
-                <h2 className='text-lg text-center'>+ Add New</h2>
+                {/* <h2 className='text-lg text-center'>+ Add New</h2> */}
+                <PlusSquare />
             </div>
 
-            <Dialog open={openDialog}>
+            <Dialog open={openDialog} onOpenChange={setOpenDialog}>
 
                 <DialogContent className="max-w-2xl">
                     <DialogHeader>

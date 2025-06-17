@@ -4,7 +4,8 @@ import ResumeList from './_components/ResumeList'
 
 function Resume() {
     return (
-        <div className='p-10 md:px-20 lg:px-32 '>
+        // <div className='p-10 md:px-20 lg:px-32 '>
+        <div className='p-10'>
 
             <h2 className='font-bold text-2xl'>Resume Builder</h2>
             <h2 className='text-gray-500'>Click and explore to Create Your Resume</h2>
