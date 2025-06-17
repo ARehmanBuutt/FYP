@@ -269,7 +269,7 @@ const Skills = () => {
             <div className='flex justify-between'>
                 <div className='flex gap-2'>
                     {skillsList.length > 0 && (
-                        <Button variant="outline" onClick={() => RemoveSkills(skillsList.length - 1)} className="text-primary">
+                        <Button variant="outline" onClick={() => RemoveSkills(skillsList.length - 1)} className="text-red-500">
                             - Remove
                         </Button>
                     )}
