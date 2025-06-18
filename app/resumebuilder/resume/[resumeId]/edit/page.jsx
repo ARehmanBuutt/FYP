@@ -50,7 +50,7 @@ const EditResume = () => {
   const fetchCompleteResumeData = async (id) => {
     try {
       const [fetchedResume, fetchedExperience, fetchedEducation, fetchedSkills] = await Promise.all([
-        db.select().from(resumes).where(eq(resumes.resumeId, id)), 
+        db.select().from(resumes).where(eq(resumes.resumeId, id)),
         db.select().from(experience).where(eq(experience.resumeId, id)),
         db.select().from(education).where(eq(education.resumeId, id)),
         db.select().from(skills).where(eq(skills.resumeId, id))
@@ -58,8 +58,8 @@ const EditResume = () => {
 
       if (fetchedResume.length > 0) {
         const fullResumeData = {
-          ...dummy, 
-          ...fetchedResume[0], 
+          ...dummy,
+          ...fetchedResume[0],
           experience: fetchedExperience,
           education: fetchedEducation,
           skills: fetchedSkills

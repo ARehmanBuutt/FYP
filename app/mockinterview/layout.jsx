@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../mockinterview/_components/Header'
+import Header from './_components/Header'
 
-function Resumelayout({ children }) {
+function Interviewlayout({ children }) {
   return (
     <div>
       <Header />
@@ -12,4 +12,4 @@ function Resumelayout({ children }) {
   )
 }
 
-export default Resumelayout
+export default Interviewlayout

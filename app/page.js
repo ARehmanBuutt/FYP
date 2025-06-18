@@ -1,19 +1,3 @@
-// import Image from "next/image";
-// import { Button } from "../components/ui/button";
-// import Link from "next/link";
-
-// export default function Home() {
-//   return (
-//     <div className="text-center text-3xl flex-col justify-center">
-//       <h2> Get Started To Explore! </h2>
-//       <Link href={'/dashboard'}> 
-//     <Button>Get Started</Button>
-//       </Link>
-//     </div>
-//   );
-// }
-
-
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../components/ui/button";
@@ -22,13 +6,13 @@ import { ArrowRight } from "lucide-react";
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      
+
       {/* Background decorative image */}
-      <Image 
-        src="/resume-genius-9si2noVCVH8-unsplash.jpg" 
-        alt="background pattern" 
-        fill 
-        className="object-cover opacity-15 pointer-events-none -z-0" 
+      <Image
+        src="/resume-genius-9si2noVCVH8-unsplash.jpg"
+        alt="background pattern"
+        fill
+        className="object-cover opacity-15 pointer-events-none -z-0"
       />
 
       {/* Top Navbar */}
@@ -36,9 +20,6 @@ export default function Home() {
         <div className="flex items-center space-x-2">
           <Image src="/logo-transparent-png.png" width={300} height={40} alt="Logo" />
         </div>
-        <Link href="/dashboard">
-          <Button variant="ghost"></Button>
-        </Link>
       </header>
 
       {/* Main Section */}
@@ -66,7 +47,7 @@ export default function Home() {
           </div>
         </div>
 
-        <Link href="/dashboard">
+        <Link href="/mockinterview">
           <Button className="text-lg px-6 py-3">
             Get Started <ArrowRight className="ml-2 w-5 h-5" />
           </Button>

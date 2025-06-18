@@ -41,8 +41,8 @@ const Feedback = ({ params }) => {
                 :
                 <>
 
-                <h2 className='text-3xl font-bold text-green-500'>Congratulation</h2>
-                <h2 className='font-bold text-2xl'>Here is your Interview Feedback</h2>
+                    <h2 className='text-3xl font-bold text-green-500'>Congratulation</h2>
+                    <h2 className='font-bold text-2xl'>Here is your Interview Feedback</h2>
 
                     <hr />
 
@@ -67,7 +67,7 @@ const Feedback = ({ params }) => {
 
                 </>}
 
-            <Button onClick={() => router.replace('/dashboard')}>Go Home</Button>
+            <Button onClick={() => router.replace('/mockinterview')}>Go Home</Button>
         </div>
     )
 }

@@ -54,70 +54,31 @@ function ThemeColor() {
         }
     };
 
-    // const updateThemeColor = async (color) => {
-    //     console.log("🎨 Selected Color:", color);
-    //     console.log("📌 Resume ID:", resumeId);
-    
-    //     if (!resumeId) {
-    //         console.error("❌ Cannot update theme color: resumeId is missing!");
-    //         return;
-    //     }
-    
-    //     try {
-    //         // Check current theme color in the database before updating
-    //         const beforeUpdate = await db
-    //             .select({ themeColor: resumes.themeColor })
-    //             .from(resumes)
-    //             .where(eq(resumes.resumeId, resumeId));
-    
-    //         console.log("🔍 Current theme color in DB:", beforeUpdate);
-    
-    //         // Perform the update query
-    //         const updated = await db
-    //             .update(resumes)
-    //             .set({ themeColor: color })
-    //             .where(eq(resumes.resumeId, resumeId))
-    //             .returning();
-    
-    //         console.log("✅ Database update response:", updated);
-    
-    //         // Check the updated theme color in the database
-    //         const afterUpdate = await db
-    //             .select({ themeColor: resumes.themeColor })
-    //             .from(resumes)
-    //             .where(eq(resumes.resumeId, resumeId));
-    
-    //         console.log("🎨 Updated theme color in DB:", afterUpdate);
-    //     } catch (error) {
-    //         console.error("❌ Error updating theme color:", error);
-    //     }
-    // };
-
     const updateThemeColor = async (color) => {
-    console.log("🎨 Selected Color:", color);
-    console.log("📌 Resume ID:", resumeId);
+        console.log("🎨 Selected Color:", color);
+        console.log("📌 Resume ID:", resumeId);
 
-    if (!resumeId) {
-        console.error("❌ Cannot update theme color: resumeId is missing!");
-        return;
-    }
+        if (!resumeId) {
+            console.error("❌ Cannot update theme color: resumeId is missing!");
+            return;
+        }
 
-    try {
-        const updated = await db
-            .update(resumes)
-            .set({ themeColor: color })
-            .where(eq(resumes.resumeId, resumeId))
-            .returning();
+        try {
+            const updated = await db
+                .update(resumes)
+                .set({ themeColor: color })
+                .where(eq(resumes.resumeId, resumeId))
+                .returning();
 
-        console.log("✅ Database update response:", updated);
+            console.log("✅ Database update response:", updated);
 
-        // ✅ Update local state and context
-        setSelectedColor(color);
-        setResumeInfo((prev) => ({ ...prev, themeColor: color }));
-    } catch (error) {
-        console.error("❌ Error updating theme color:", error);
-    }
-};
+            // ✅ Update local state and context
+            setSelectedColor(color);
+            setResumeInfo((prev) => ({ ...prev, themeColor: color }));
+        } catch (error) {
+            console.error("❌ Error updating theme color:", error);
+        }
+    };
 
     return (
         <Popover>

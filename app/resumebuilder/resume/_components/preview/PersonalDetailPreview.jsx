@@ -14,22 +14,22 @@ const PersonalDetailPreview = ({ resumeInfo }) => {
             <h2 className='text-center text-sm font-medium'
                 style={{
                     color: resumeInfo?.themeColor
-                }}>{resumeInfo?.address}</h2>    
+                }}>{resumeInfo?.address}</h2>
 
-                <div className='flex justify-between'>
-                    <h2 className='font-normal text-xs'
+            <div className='flex justify-between'>
+                <h2 className='font-normal text-xs'
                     style={{
                         color: resumeInfo?.themeColor
                     }}>{resumeInfo?.phone}</h2>
-                    <h2 className='font-normal text-xs'
+                <h2 className='font-normal text-xs'
                     style={{
                         color: resumeInfo?.themeColor
                     }}>{resumeInfo?.email}</h2>
-                </div>
-                <hr className='border-[1.5px] my-2'
+            </div>
+            <hr className='border-[1.5px] my-2'
                 style={{
                     borderColor: resumeInfo?.themeColor
-                }}/>
+                }} />
         </div>
     )
 }

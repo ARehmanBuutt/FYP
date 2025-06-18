@@ -12,8 +12,8 @@ function Resume() {
 
             <div className='grid grid-cols-2 md:grid-col-3 lg:grid-cols-5 mt-10'>
                 <AddNewResume />
-      </div>
-      <ResumeList />
+            </div>
+            <ResumeList />
         </div>
     )
 }

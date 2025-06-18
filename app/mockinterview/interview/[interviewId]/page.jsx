@@ -33,7 +33,7 @@ const Interview = ({ params }) => {
 
         <div className='flex flex-col my-5 gap-5'>
           <div className='flex flex-col gap-5 p-5 rounded-lg border'>
-            
+
             <h2 className='text-lg'><strong>Job Role/Job Position:</strong> {interviewData?.jobPosition} </h2>
             <h2 className='text-lg'><strong>Job Description/Tech Stack:</strong> {interviewData?.jobDesc} </h2>
             <h2 className='text-lg'><strong>Years of Experience:</strong> {interviewData?.jobExperience} </h2>
@@ -49,7 +49,7 @@ const Interview = ({ params }) => {
         <div>
 
 
-        {webCamEnable ? (
+          {webCamEnable ? (
             <div className=" flex items-center justify-center p-10">
               <Webcam
                 onUserMedia={() => setWebCamEnable(true)}
@@ -75,7 +75,7 @@ const Interview = ({ params }) => {
         </div>
       </div>
       <div className="flex justify-center my-4 md:my-0 md:justify-end md:items-end">
-        <Link href={"/dashboard/interview/" + params.interviewId + "/start"}>
+        <Link href={"/mockinterview/interview/" + params.interviewId + "/start"}>
           <Button className="mt-1">Start Interview</Button>
         </Link>
       </div>

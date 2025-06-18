@@ -6,7 +6,7 @@ import ExperiencePreview from './preview/ExperiencePreview';
 import EducationalPreview from './preview/EducationalPreview';
 import SkillsPreview from './preview/SkillsPreview';
 
-const ResumePreview = () => { 
+const ResumePreview = () => {
     const { resumeInfo } = useContext(ResumeInfoContext);
 
     return (

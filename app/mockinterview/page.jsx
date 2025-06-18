@@ -4,7 +4,7 @@ import AddNewInterview from './_components/AddNewInterview'
 import InterviewlList from './_components/InterviewlList'
 
 
-const Dashboard =( )=> {
+const Interview = () => {
   return (
     <div className='p-10'>
 
@@ -12,14 +12,14 @@ const Dashboard =( )=> {
       <h2 className='text-gray-500'>Create and Start your AI Mock-Interview</h2>
 
       <div className='grid grid-cols-1 md:grid-col-3 my-5'>
-        <AddNewInterview/>
+        <AddNewInterview />
       </div>
 
       {/* Previous Interview's List */}
-      <InterviewlList/>
+      <InterviewlList />
 
     </div>
   )
 }
 
-export default Dashboard
+export default Interview

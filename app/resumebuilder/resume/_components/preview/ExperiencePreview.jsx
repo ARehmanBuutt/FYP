@@ -8,16 +8,16 @@ const ExperiencePreview = ({ resumeInfo }) => {
                     color: resumeInfo?.themeColor
                 }}>Professional Experience</h2>
             <hr style={{
-                    borderColor: resumeInfo?.themeColor
-                }} />
+                borderColor: resumeInfo?.themeColor
+            }} />
 
             {resumeInfo?.experience?.map((experience, index) => (
                 <div key={index} className='my-5'>
                     <h2 className='text-sm font-bold'
-                    style={{
-                        color: resumeInfo?.themeColor
-                    }}>
-                    {experience?.positionTitle}</h2>
+                        style={{
+                            color: resumeInfo?.themeColor
+                        }}>
+                        {experience?.positionTitle}</h2>
                     <h2 className='text-xs flex justify-between'>{experience?.companyName},
                         {experience?.city},
                         {experience?.state}
@@ -26,7 +26,7 @@ const ExperiencePreview = ({ resumeInfo }) => {
                     {/* <p className='text-xs my-2'>
                         {experience?.workSummary}
                     </p> */}
-                    <div dangerouslySetInnerHTML={{__html:experience?.workSummary}}/>
+                    <div dangerouslySetInnerHTML={{ __html: experience?.workSummary }} />
                 </div>
             ))}
         </div>

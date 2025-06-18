@@ -75,13 +75,7 @@ const ResumeList = () => {
         <div>
             <h2 className='font-medium text-xl mt-7'>Previous Resumes:</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-3'>
-                {/* {resumeList.length > 0 ? (
-                    resumeList.map((resume) => (
-                        <ResumeItemCard key={resume.resumeId} resume={resume} onDelete={handleDeleteFromUI} />
-                    ))
-                ) : (
-                    <p className="text-gray-500">Fetching From Database...</p>
-                )} */}
+
                 {resumeList.length > 0 ? (
                     resumeList.map((resume) => (
                         <ResumeItemCard key={resume.resumeId} resume={resume} onDelete={handleDeleteFromUI} />

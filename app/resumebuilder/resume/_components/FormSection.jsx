@@ -1,5 +1,5 @@
 "use client"
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PersonalDetail from './form/PersonalDetail'
 import { Button } from '../../../../components/ui/button'
 import { ArrowLeft, ArrowRight, Home, LayoutGrid } from 'lucide-react'
@@ -23,9 +23,9 @@ const FormSection = () => {
 
                 <div className='flex gap-5'>
 
-               <ThemeColor/>
+                    <ThemeColor />
 
-                <Button size='sm' onClick={()=>router.push('/resumebuilder')}><Home/> Home </Button>
+                    <Button size='sm' onClick={() => router.push('/resumebuilder')}><Home /> Home </Button>
 
                 </div>
 
@@ -50,7 +50,7 @@ const FormSection = () => {
                         </>
                     ) : (
                         <>
-                        {activeFormIndex > 1 && (
+                            {activeFormIndex > 1 && (
                                 <Button size="sm" onClick={() => setActiveFormIndex(activeFormIndex - 1)}>
                                     <ArrowLeft /> Previous
                                 </Button>
@@ -73,8 +73,8 @@ const FormSection = () => {
                             : activeFormIndex == 5 ?
                                 <Skills enabledNext={(v) => setEnableNext(v)} />
                                 : activeFormIndex == 6 ?
-                                <DownloadShare />
-                                : null
+                                    <DownloadShare />
+                                    : null
             }
 
             {/* summary */}

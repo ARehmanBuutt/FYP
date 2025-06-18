@@ -89,7 +89,7 @@ Ensure the response is **only** a JSON array with this structure:
             console.log("Inserted ID:", resp)
             if (resp) {
                 setOpenDialog(false);
-                router.push("/dashboard/interview/" + resp[0]?.mockId)
+                router.push("/mockinterview/interview/" + resp[0]?.mockId)
             }
         }
         else {
