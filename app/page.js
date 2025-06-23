@@ -47,7 +47,7 @@ export default function Home() {
           </div>
         </div>
 
-        <Link href="/mockinterview">
+        <Link href="/dashboard" className="inline-block">
           <Button className="text-lg px-6 py-3">
             Get Started <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
