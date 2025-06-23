@@ -5,8 +5,9 @@ import { db } from '../../../utils/db';
 import { resumes, experience, education, skills } from '../../../utils/schema';
 import { eq } from 'drizzle-orm';
 import { toast } from 'sonner';
+import { motion } from 'framer-motion';
 
-const ResumeItemCard = ({ resume, onDelete }) => {
+const ResumeItemCard = ({ resume, onDelete, index = 0 }) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
@@ -23,7 +24,6 @@ const ResumeItemCard = ({ resume, onDelete }) => {
         setLoading(true);
 
         try {
-            console.log("🗑 Deleting resume with ID:", resume.resumeId);
 
             const resumeUuid = resume.resumeId.toString();
 
@@ -46,10 +46,16 @@ const ResumeItemCard = ({ resume, onDelete }) => {
     };
 
     return (
-        // <div className='border shadow-sm rounded-lg p-3'>
-        <div className='p-3 border bg-secondary rounded-lg w-full hover:scale-105 transition-all hover:shadow-md cursor-pointer border-dashed flex flex-col mt-4'>
-            <h2 className='font-bold text-primary'>{resume?.title}</h2>
-            <h3 className='text-sm text-gray-600'>{resume?.jobTitle}</h3>
+        <motion.div
+            initial={{ opacity: 0, x: index % 2 === 0 ? -80 : 80 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.5, delay: index * 0.4 }}
+            whileHover={{ scale: 1.03 }}
+            className='p-3 border bg-secondary rounded-lg w-full hover:scale-105 transition-all hover:shadow-md cursor-pointer border-dashed flex flex-col mt-4'
+        >
+            <h2 className='font-bold text-primary text-center'>{resume?.title}</h2>
+            <h3 className='text-sm text-gray-600 text-center border-b border-dashed pb-3'>{resume?.jobTitle}</h3>
 
             {/* Experience Section */}
             <div className='mt-3'>
@@ -102,7 +108,8 @@ const ResumeItemCard = ({ resume, onDelete }) => {
                     {loading ? "Deleting..." : "Delete Resume"}
                 </Button>
             </div>
-        </div>
+
+        </motion.div>
     );
 };
 

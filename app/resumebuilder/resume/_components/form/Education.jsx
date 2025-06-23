@@ -146,7 +146,7 @@ const Education = () => {
             {educationalList.map((item, index) => (
                 <div key={index} className='grid grid-cols-2 gap-3 border p-3 my-5'>
                     <div className='col-span-2'>
-                        <label className='text-xs'>University Name</label>
+                        <label className='text-xs'>School / College / University Name</label>
                         <Input name="universityName" value={item.universityName} onChange={(e) => handleChange(index, e)} />
                     </div>
                     <div>

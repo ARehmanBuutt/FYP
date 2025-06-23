@@ -5,6 +5,7 @@ import { useUser } from '@clerk/nextjs';
 import { desc, eq } from 'drizzle-orm';
 import React, { useEffect, useState } from 'react';
 import ResumeItemCard from './ResumeItemCard';
+import { AnimatePresence } from 'framer-motion';
 
 const ResumeList = () => {
     const { user } = useUser();
@@ -73,18 +74,26 @@ const ResumeList = () => {
 
     return (
         <div>
-            <h2 className='font-medium text-xl mt-7'>Previous Resumes:</h2>
+            <h2 className='font-medium text-xl mt-7'>Previous Resume's List:</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-3'>
 
-                {resumeList.length > 0 ? (
-                    resumeList.map((resume) => (
-                        <ResumeItemCard key={resume.resumeId} resume={resume} onDelete={handleDeleteFromUI} />
-                    ))
-                ) : user ? (
-                    <p className="text-gray-500">No previous resumes.</p>
-                ) : (
-                    <p className="text-gray-500">Fetching From Database...</p>
-                )}
+                <AnimatePresence>
+                    {resumeList.length > 0 ? (
+                        resumeList.map((resume, index) => (
+                            <ResumeItemCard
+                                key={resume.resumeId}
+                                resume={resume}
+                                index={index}
+                                onDelete={handleDeleteFromUI}
+                            />
+                        ))
+                    ) : user ? (
+                        <p className="text-gray-500">No previous resumes.</p>
+                    ) : (
+                        <p className="text-gray-500">Fetching From Database...</p>
+                    )}
+                </AnimatePresence>
+
             </div>
         </div>
     );

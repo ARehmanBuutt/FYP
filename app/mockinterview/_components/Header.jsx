@@ -43,17 +43,17 @@ function Header() {
                     </li>
                 </Link>
 
-                <Link href={'/queans'}>
+                <Link href={'/interviewprep'}>
                     <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
-                    ${path == `/queans` && `text-primary font-bold`}
+                    ${path == `/interviewprep` && `text-primary font-bold`}
                     `}>
-                        Interview Preparation
+                        Interview Prep
                     </li>
                 </Link>
 
-                <Link href={'/suggestions'}>
+                <Link href={'/jobsuggestion'}>
                     <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
-                    ${path == `/suggestions` && `text-primary font-bold`}
+                    ${path == `/jobsuggestion` && `text-primary font-bold`}
                     `}>
                         Job Suggestion
                     </li>
@@ -63,7 +63,7 @@ function Header() {
                     <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
                     ${path == `/about` && `text-primary font-bold`}
                     `}>
-                        Contact Us
+                        Contact
                     </li>
                 </Link>
 
