@@ -59,9 +59,9 @@ function Header() {
                     </li>
                 </Link>
 
-                <Link href={'/about'}>
+                <Link href={'/contact'}>
                     <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer
-                    ${path == `/about` && `text-primary font-bold`}
+                    ${path == `/contact` && `text-primary font-bold`}
                     `}>
                         Contact
                     </li>
