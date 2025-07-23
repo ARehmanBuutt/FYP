@@ -5,7 +5,7 @@ function InterviewPreplayout({ children }) {
     return (
         <div>
             <Header />
-            <div className='w-full h-full'>
+            <div className='mx-5 md:mx-20 lg:mx-36'>
                 {children}
             </div>
         </div>
