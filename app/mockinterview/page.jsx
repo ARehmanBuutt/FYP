@@ -15,7 +15,6 @@ const Interview = () => {
         <AddNewInterview />
       </div>
 
-      {/* Previous Interview's List */}
       <InterviewlList />
 
     </div>
