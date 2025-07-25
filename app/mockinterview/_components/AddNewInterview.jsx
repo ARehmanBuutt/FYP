@@ -104,13 +104,9 @@ Ensure the response is **only** a JSON array with this structure:
 
     return (
         <div>
-            <div
-                // className="p-10 border rounded-lg bg-secondary hover:scale-145 hover:shadow-md cursor-pointer transition-all max-w-sm mx-full"
-                className="p-14 border items-center flex justify-center bg-secondary rounded-lg h-[300px] w-[292px] hover:scale-105 transition-all hover:shadow-md cursor-pointer border-dashed"
+            <div className="p-14 border items-center flex justify-center bg-secondary rounded-lg h-[300px] w-[292px] hover:scale-105 transition-all hover:shadow-md cursor-pointer border-dashed"
                 onClick={() => setOpenDialog(true)}
             >
-
-                {/* <h2 className='text-lg text-center'>+ Add New</h2> */}
                 <PlusSquare />
             </div>
 
