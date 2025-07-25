@@ -70,3 +70,12 @@ export const skills = pgTable("skills", {
   name: text("name").notNull(),
   rating: integer("rating").notNull(),
 });
+
+export const prepInterview = pgTable("prepInterview", {
+  id: serial("id").primaryKey(),
+  prepId: varchar("prepId").notNull(),
+  jobTitle: varchar("jobTitle").notNull(),
+  jsonPrepResp: text("jsonPrepResp").notNull(),
+  createdBy: varchar("createdBy").notNull(),
+  createdAt: varchar("createdAt").notNull(),
+});
