@@ -3,7 +3,7 @@ import Header from '../mockinterview/_components/Header'
 
 function InterviewPreplayout({ children }) {
     return (
-        <div>
+        <div className="min-h-screen bg-blue-50">
             <Header />
             <div className='mx-5 md:mx-20 lg:mx-36'>
                 {children}
