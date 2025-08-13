@@ -79,3 +79,23 @@ export const prepInterview = pgTable("prepInterview", {
   createdBy: varchar("createdBy").notNull(),
   createdAt: varchar("createdAt").notNull(),
 });
+
+// export const jobs = pgTable("jobs", {
+//   id: uuid("id").defaultRandom().primaryKey(),
+//   title: text("title").notNull(),
+//   company: text("company").notNull(),
+//   location: text("location").notNull(),
+//   skills: text("skills").array().notNull(), // e.g., ['React', 'PostgreSQL']
+//   description: text("description").notNull(),
+//   jobLink: text("job_link").notNull(),
+//   industry: text("industry"),
+//   postedAt: timestamp("posted_at").defaultNow(),
+// });
+
+// export const userSavedJobs = pgTable("user_saved_jobs", {
+//   id: uuid("id").defaultRandom().primaryKey(),
+//   userEmail: text("user_email").notNull(),
+//   jobId: uuid("job_id").notNull(),
+//   status: text("status").default("Saved"), // Saved | Applied
+//   savedAt: timestamp("saved_at").defaultNow(),
+// });
