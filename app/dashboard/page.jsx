@@ -112,7 +112,7 @@ export default function DashboardPage() {
                          <ul className="space-y-1">
                              <li><a href="/mockinterview">AI Assistance</a></li>
                              <li><a href="/resumebuilder">Resume Help</a></li>
-                             <li><a href="/mockunterview">Mock Interview</a></li>
+                             <li><a href="/mockinterview">Mock Interview</a></li>
                              <li><a href="/interviewprep">Interview Prep</a></li>
                              <li><a href="/resumebuilder">Resume templates</a></li>
                              <li><a href="jobsuggestion">Career Guidance</a></li>
