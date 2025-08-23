@@ -11,8 +11,10 @@ const Interview = () => {
       <h2 className='font-bold text-2xl'>Mock-Interview</h2>
       <h2 className='text-gray-500'>Create and Start your AI Mock-Interview</h2>
 
-      <div className='grid grid-cols-2 md:grid-col-3 lg:grid-cols-5 mt-10 mb-7'>
-        <AddNewInterview />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-10 mb-7">
+        <div className="flex justify-center sm:justify-start">
+          <AddNewInterview />
+        </div>
       </div>
 
       <InterviewlList />

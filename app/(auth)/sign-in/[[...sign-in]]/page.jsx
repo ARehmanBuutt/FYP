@@ -81,6 +81,78 @@
 
 
 
+// 'use client'
+
+// import { SignIn } from '@clerk/nextjs'
+// import { motion } from 'framer-motion'
+
+// export default function Page() {
+//   return (
+//     <section className="bg-white">
+//       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
+//         {/* Left image section */}
+//         <motion.section
+//           initial={{ opacity: 0 }}
+//           animate={{ opacity: 1 }}
+//           transition={{ duration: 1.5 }}
+//           className="relative flex h-screen items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6"
+//         >
+//           <img
+//             alt="Interview preparation"
+//             src="/signin.jpeg"
+//             className="absolute inset-0 h-full w-full object-cover object-bottom opacity-60"
+//           />
+
+//           <div className="hidden lg:relative lg:block lg:p-12">
+//             <a className="block text-white" href="#">
+//               <span className="sr-only">Home</span>
+//               <svg
+//                 className="h-8 sm:h-10"
+//                 viewBox="0 0 28 24"
+//                 fill="none"
+//                 xmlns="http://www.w3.org/2000/svg"
+//               >
+//                 <path
+//                   d="M0.41 10.3847C1.14777 7.4194..."
+//                   fill="currentColor"
+//                 />
+//               </svg>
+//             </a>
+
+//             <h2 className="mt-6 text-xl font-bold text-white sm:text-3xl md:text-3xl">
+//               Build Your Resume with Confidence 💼
+//             </h2>
+
+//             <p className="mt-4 text-lg leading-relaxed text-white/90">
+//               Build, polish, and share your resume. Get interview-ready with AI tools.
+//             </p>
+//           </div>
+//         </motion.section>
+
+//         {/* Sign-in section */}
+//         <motion.main
+//           initial={{ opacity: 0, y: 30 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           transition={{ duration: 1.2 }}
+//           className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
+//         >
+//           <div className="flex w-full h-full items-center justify-center">
+//             <motion.div
+//               initial={{ opacity: 0, scale: 0.95 }}
+//               animate={{ opacity: 1, scale: 1 }}
+//               transition={{ delay: 2 }}
+//               className="w-full max-w-md"
+//             >
+//               <SignIn />
+//             </motion.div>
+//           </div>
+//         </motion.main>
+//       </div>
+//     </section>
+//   )
+// }
+
+
 'use client'
 
 import { SignIn } from '@clerk/nextjs'
@@ -95,7 +167,7 @@ export default function Page() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
-          className="relative flex h-screen items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6"
+          className="relative flex h-72 sm:h-96 lg:h-full items-end bg-gray-900 lg:col-span-5 xl:col-span-6"
         >
           <img
             alt="Interview preparation"
@@ -134,14 +206,15 @@ export default function Page() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
-          className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
+          className="flex items-center justify-center px-6 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
         >
+          {/* Centering wrapper */}
           <div className="flex w-full h-full items-center justify-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 2 }}
-              className="w-full max-w-md"
+              transition={{ delay: 0.5 }}
+              className="w-full max-w-xs sm:max-w-sm mx-auto flex justify-center"
             >
               <SignIn />
             </motion.div>
