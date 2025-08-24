@@ -12,7 +12,8 @@ import { useUser } from '@clerk/nextjs'
 import { db } from '../../../../../../utils/db'
 import moment from "moment";
 
-const RecordAnswerSection = ({ mockInterviewQuestion, activeQuestionIndex, interviewData }) => {
+// const RecordAnswerSection = ({ mockInterviewQuestion, activeQuestionIndex, interviewData }) => {
+const RecordAnswerSection = ({ mockInterviewQuestion, activeQuestionIndex, interviewData, webCamEnable, setWebCamEnable }) => {
     const [userAnswer, setUserAnswer] = useState('')
     const { user } = useUser();
     const [loading, setLoading] = useState(false)
@@ -102,33 +103,104 @@ const RecordAnswerSection = ({ mockInterviewQuestion, activeQuestionIndex, inter
     }
 
     return (
-        <div className='flex items-center justify-center flex-col'>
+        // <div className='flex items-center justify-center flex-col'>
 
-            <div className='flex flex-col my-20  justify-center items-center rounded-lg p-5'>
-                <Image src={"/camera.jpg"} width={200} height={200} className='absolute' />
-                <Webcam
-                    mirrored={true}
-                    style={{
-                        height: 300,
-                        width: '100%',
-                        zIndex: 10,
-                    }}
-                />
+        //     <div className='flex flex-col my-20  justify-center items-center rounded-lg p-5'>
+        //         <Image src={"/camera.jpg"} width={200} height={200} className='absolute' />
+        //         <Webcam
+        //             mirrored={true}
+        //             style={{
+        //                 height: 300,
+        //                 width: '100%',
+        //                 zIndex: 10,
+        //             }}
+        //         />
+        //     </div>
+        //     <Button
+        //         disabled={loading}
+        //         variant="outline" className="my-10"
+        //         onClick={StartStopRecording}>
+        //         {isRecording ?
+        //             <h2 className='text-red-400 flex gap-2'>
+        //                 <StopCircle /> Stop Recording
+        //             </h2>
+        //             :
+        //             'Record Answer'}</Button>
+
+        //     {/* <Button onClick={() => console.log(userAnswer)}>Show User Answer</Button> */}
+
+        // </div>
+
+        //         <div className="flex items-center justify-center flex-col">
+        //   <div className="flex flex-col my-10 md:my-20 justify-center items-center rounded-lg p-3 md:p-5">
+        //     <Image src={"/camera.jpg"} width={200} height={200} className="absolute" />
+        //     <Webcam
+        //       mirrored={true}
+        //       style={{
+        //         height: 200, // smaller default (mobile)
+        //         width: "100%",
+        //         zIndex: 10,
+        //       }}
+        //       className="md:h-[300px]" // bigger only on desktop
+        //     />
+        //   </div>
+
+        //   <Button
+        //     disabled={loading}
+        //     variant="outline"
+        //     className="my-6 md:my-10"
+        //     onClick={StartStopRecording}
+        //   >
+        //     {isRecording ? (
+        //       <h2 className="text-red-400 flex gap-2">
+        //         <StopCircle /> Stop Recording
+        //       </h2>
+        //     ) : (
+        //       "Record Answer"
+        //     )}
+        //   </Button>
+        // </div>
+
+        <div className="flex items-center justify-center flex-col">
+            <div className="flex flex-col my-10 md:my-20 justify-center items-center rounded-lg p-3 md:p-5">
+                {webCamEnable ? (
+                    <Webcam
+                        mirrored={true}
+                        style={{ height: 200, width: "100%", zIndex: 10 }}
+                        className="md:h-[300px]"
+                    />
+                ) : (
+                    <Image src={"/camera.jpg"} width={200} height={200} />
+                )}
             </div>
-            <Button
-                disabled={loading}
-                variant="outline" className="my-10"
-                onClick={StartStopRecording}>
-                {isRecording ?
-                    <h2 className='text-red-400 flex gap-2'>
-                        <StopCircle /> Stop Recording
-                    </h2>
-                    :
-                    'Record Answer'}</Button>
 
-            {/* <Button onClick={() => console.log(userAnswer)}>Show User Answer</Button> */}
 
+            {/* Toggle webcam inside RecordAnswerSection */}
+            <div className="flex gap-4 w-full justify-center">
+                <Button
+                    className="flex-1"
+                    onClick={() => setWebCamEnable(prev => !prev)}
+                >
+                    {webCamEnable ? "Disable Camera" : "Enable Camera"}
+                </Button>
+
+                <Button
+                    disabled={loading}
+                    variant="outline"
+                    className="flex-1"
+                    onClick={StartStopRecording}
+                >
+                    {isRecording ? (
+                        <h2 className="text-red-400 flex gap-2">
+                            <StopCircle /> Stop Recording
+                        </h2>
+                    ) : (
+                        "Record Answer"
+                    )}
+                </Button>
+            </div>
         </div>
+
     )
 }
 
